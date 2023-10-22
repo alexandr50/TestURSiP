@@ -6,6 +6,8 @@ from report.servces.parse_table import get_random_date
 
 
 def get_report_data(row):
+    """Функция подготавливает данные для сохранения"""
+
     report_data = Report(
         company=row['company'],
         fact_qliq_data1=row['fact_qliq_data1'],
@@ -22,6 +24,8 @@ def get_report_data(row):
 
 
 def save_report(data):
+    """Функция сохранияет данные в бд"""
+
     for i, row in tqdm(data.iterrows()):
         res = get_report_data(row)
         res.date = get_random_date()
@@ -29,6 +33,8 @@ def save_report(data):
 
 
 def update_report():
+    """Функция добавляет 2 поля total на основе уже сохраненных данных"""
+
     totals = Report.objects.values('date').annotate(
         total_qliq=
         Sum('fact_qliq_data1') +
