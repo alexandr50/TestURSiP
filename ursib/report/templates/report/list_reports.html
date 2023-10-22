@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+</head>
+<body>
+<div class="printout">
+        {% if error_message %}
+            <h3>Ошибка обработки данных:</h3>
+            <p>{{ error_message }}</p>
+        {% endif %}
+        {% if info_message %}
+            <h4>{{ info_message }}</h4>
+        {% endif %}
+        <div id="id_db_data">
+        {% if reports %}
+            <h3>Все данные:</h3>
+            {% autoescape off %}
+                {{ reports }}
+            {% endautoescape %}
+        {% endif %}
+        </div>
+
+    </div>
+
+</body>
+</html>

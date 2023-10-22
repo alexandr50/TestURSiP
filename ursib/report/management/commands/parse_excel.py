@@ -23,4 +23,5 @@ class Command(BaseCommand):
             update_report
         )
         report.create_report(file_path)
+        print('ok')
 
