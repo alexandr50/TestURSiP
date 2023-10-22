@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+</head>
+<body>
+    <form action="{% url 'report:create' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+        <p></p>
+        <div class="form-group" >
+            <label for="upload_file">Загрузка файла для парсинга</label><br><br>
+            <input type="file"
+                   class="form-control-file"
+                   title="Загрузка файла"
+                   name="name_file"
+                   accept=".xlsx, .xls"
+                   id="name_file"
+                   required>
+
+        </div>
+        <br>
+        <div>
+                <input type="submit"
+                class="btn-sm btn-primary"
+                value="Распарсить">
+        </div>
+    </form>
+
+    <div class="printout">
+        {% if error_message %}
+            <h3>Неуспешная попытка парсинга файла</h3>
+            <p>{{ error_message }}</p>
+        {% endif %}
+        <p>
+        {% if df_to_html %}
+            <h3>Загруженные данные:</h3>
+            {% autoescape off %}
+                {{ df_to_html }}
+            {% endautoescape %}
+        {% endif %}
+        </p>
+
+    </div>
+</body>
+</html>
